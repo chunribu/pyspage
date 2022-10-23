@@ -1,15 +1,9 @@
-import os, sys, importlib
-from .layout import all_elements
+from .layout import load_layout_str, all_elements
 
 def get_elements(fpath):
-    dir_name = os.path.dirname(fpath)
-    sys.path.append(dir_name)
-
-    module_name = os.path.basename(fpath).rstrip('.py')
-    module = importlib.import_module(module_name)
-    layout_str = module.layout
-
-    return all_elements(layout_str)
+    layout_str = load_layout_str(fpath)
+    elements = all_elements(layout_str)
+    return elements
 
 def ele_in_line(line, eles):
     line = [j for i in line.split('=') for j in i.split() if j]
