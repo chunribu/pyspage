@@ -1,9 +1,5 @@
-from .layout import load_layout_str, all_elements
+from .layout import all_elements
 
-def get_elements(fpath):
-    layout_str = load_layout_str(fpath)
-    elements = all_elements(layout_str)
-    return elements
 
 def ele_in_line(line, eles):
     line = [j for i in line.split('=') for j in i.split() if j]
@@ -17,7 +13,7 @@ def select_element(ele):
 
 def py2pys(fpath):
     script = ''
-    elements = get_elements(fpath)
+    elements = all_elements(fpath)
     with open(fpath) as f:
         bypass = False
         for line in f:

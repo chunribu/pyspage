@@ -1,5 +1,3 @@
-
-
 class Base:
     def __init__(self):
         self.innerHtml = '{innerHtml}'
@@ -8,6 +6,9 @@ class Base:
     @property
     def html(self):
         return self.template.format(innerHtml=self.innerHtml, class_=self.class_, id_=self.id_)
+    def write(self, content):
+        '''Fill this element with the content you provide (text or figure).'''
+        pass
 
 class Box(Base):
     template = '''
@@ -49,7 +50,7 @@ class Page:
 <body>
   {layout}
   <py-script id="pyspage">
-    {script}
+{script}
   </py-script>
 </body>
 </html>
