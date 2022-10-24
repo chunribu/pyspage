@@ -47,11 +47,15 @@ btn_a = document.querySelector("#btn_a")
 btn_b = document.querySelector("#btn_b")
 
 btn_a.onclick = lambda e: print('a is clicked!')
+
 def click_b(e):
     print('b is clicked!')
 btn_b.onclick = click_b
-row_a.classList.add('bg-warning')
-Element('row_a').write('This is the content.')
+
+def create_row_a():
+    row_a.classList.add('bg-warning')
+    Element('row_a').write('This is the content.')
+create_row_a()
 
   </py-script>
 </body>

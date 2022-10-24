@@ -18,33 +18,44 @@ In the layout part, a `layout` variable should be defined, of which the contents
 
 ```python
 layout = '''
-box_a
-    btn_b
-    btn_c
+row_a
+row_b
+    col_a
+        btn_a
+    col_b
+        btn_b
 '''
 ```
 
 In the script part, all the elements above should be created.
 
 ```python
-from pyspage.elements import Box, Button
+from pyspage import *
 
-box_a = Box()
-btn_b = Button('CLICK B')
-btn_c = Button('CLICK C')
+row_a = Row()
+row_b = Row()
+col_a = Column()
+col_b = Column()
+btn_a = Button('CLICK a')
+btn_b = Button('CLICK b')
 ```
 
 You can define a function and let an element run it on a certain event happens.
 
 ```python
-btn_b.onclick = lambda e: print('B is clicked!')
+btn_a.onclick = lambda e: print('a is clicked!')
 
-def click_c(e):
-    print('C is clicked!')
-btn_c.onclick = click_c
+def click_b(e):
+    print('b is clicked!')
+btn_b.onclick = click_b
+
+def create_row_a():
+    row_a.classList.add('bg-warning')
+    row_a.write('This is the content.')
+row_a.oncreate = create_row_a
 ```
 
-Also, if you have created a figure with `matplotlib` or `altair`, you can show the figure in an empty box, e.g. `box_b.write(fig)`.
+You can create a figure with `matplotlib` or `altair`, and show it in an empty box(`row` or `column`) by `box.write(fig)`.
 
 ### Step 2
 
@@ -53,9 +64,15 @@ In your terminal, run as follow
 pyspage index.py
 ```
 
-a `index.html` in current direction are generated. 
+a `index.html` in current directionary is generated. 
 
-This page can then be deployed on the [GitHub Page](https://pages.github.com/), you don't have to bother about anything else.🎉🎉🎉
+If you use the arguments `-s`(for server) and `-b`(for browser), pyspage will start a server on 127.0.0.1:8000 and open browser automatically.
+
+```shell
+pyspage index.py -sb
+```
+
+This page can then be deployed on [GitHub Pages](https://pages.github.com/), you don't have to bother about anything with HTML, JS or backend APIs.🎉🎉🎉
 
 ## License
-[MIT License](LICENSE)
+The [MIT License](LICENSE).
