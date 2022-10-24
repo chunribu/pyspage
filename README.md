@@ -3,7 +3,7 @@
 Quickly build open source web pages for academic purposes in a pythonic and elegant way.
 
 ## Installation
-*temporarily unavailable*
+
 ```shell
 pip install pyspage
 ```
