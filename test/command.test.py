@@ -5,9 +5,9 @@ sys.path.append('..')
 from pyspage import command
 class A:
     file = 'mock.py'
-    outdir = None
+    output = None
     localize = False
-    server = False
-    browser = False
+    server = True
+    browser = True
 args = A()
 command.main(args)

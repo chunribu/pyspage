@@ -1,6 +1,8 @@
 from .elements import *
 from .layout import layout_to_html
 from .pyscript import py2pys
+from .command import PYSPAGE
+
 
 __author__ = 'jianjiang.bio@gmail.com'
 __version__ = '0.0.1'

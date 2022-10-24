@@ -27,7 +27,7 @@ def parse_layout(fpath):
     indent_and_id = []
     for line in layout_str.split('\n'):
         match = pattern.search(line)
-        indent = match.group(0)
+        indent = match.group(1)
         id_ = line.strip()
         indent_and_id.append((indent, id_))
     return indent_and_id
@@ -74,7 +74,7 @@ def gen_id_dict(ind_and_id):
             stack[-1][id_] = new_dict
             stack.append(new_dict)
             level_stack.append(level)
-        elif level == level_stack[-1]:
+        elif level <= level_stack[-1]:
             while 1:
                 stack.pop()
                 level_stack.pop()

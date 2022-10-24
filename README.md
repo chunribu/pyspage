@@ -44,7 +44,7 @@ def click_c(e):
 btn_c.onclick = click_c
 ```
 
-Also, if you have created a figure with `matplotlib` or `altair`, you can show the figure in an empty box, e.g. <del> `box_b.write(fig)`</del> .
+Also, if you have created a figure with `matplotlib` or `altair`, you can show the figure in an empty box, e.g. `box_b.write(fig)`.
 
 ### Step 2
 
@@ -53,7 +53,9 @@ In your terminal, run as follow
 pyspage index.py
 ```
 
-a `index.html` in current direction are generated. This page can then be deployed on the [GitHub Page](https://pages.github.com/), you don't have to bother about anything else.🎉🎉🎉
+a `index.html` in current direction are generated. 
+
+This page can then be deployed on the [GitHub Page](https://pages.github.com/), you don't have to bother about anything else.🎉🎉🎉
 
 ## License
 [MIT License](LICENSE)

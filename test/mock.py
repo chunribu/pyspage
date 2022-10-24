@@ -1,17 +1,25 @@
-from pyspage.elements import Box, Button
+from pyspage.elements import Row, Column, Button
 import time
 
 layout = '''
-box_a
-    btn_b
-    btn_c
+row_a
+row_b
+    col_a
+        btn_a
+    col_b
+        btn_b
 '''
 
-box_a = Box()
-btn_b = Button('CLICK B')
-btn_c = Button('CLICK C')
+row_a = Row()
+row_b = Row()
+col_a = Column()
+col_b = Column()
+btn_a = Button('CLICK a')
+btn_b = Button('CLICK b')
 
-btn_b.onclick = lambda e: print('B is clicked!')
-def click_c(e):
-    print('C is clicked!')
-btn_c.onclick = click_c
+btn_a.onclick = lambda e: print('a is clicked!')
+def click_b(e):
+    print('b is clicked!')
+btn_b.onclick = click_b
+row_a.oncreate = lambda e: row_a.classList.add('bg-warning')
+row_a.write('This is the content.')
