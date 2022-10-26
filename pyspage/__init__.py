@@ -1,16 +1,17 @@
 from .elements import *
 from .layout import layout_to_html
-from .pyscript import py2pys
-from .command import PYSPAGE
+from .pyscript import py2pys, get_pkgs
+from .utils import name
 
 
 __author__ = 'jianjiang.bio@gmail.com'
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 
 def main(fpath):
     script = py2pys(fpath)
     html = layout_to_html(fpath)
-    page = Page(layout=html, script=script)
+    packages = get_pkgs(fpath)
+    page = Page(layout=html, script=script, packages=packages)
     return page.html
 
 # fake methods

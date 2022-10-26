@@ -3,17 +3,8 @@ import os
 import pyspage
 
 
-colors = ['\33[41m', '\33[42m', '\33[43m', '\33[91m', '\33[44m', '\33[45m', '\33[46m']
-start = '\33[5m'
-end = '\33[0m'
-string = ''
-for t,c in zip('PYSPAGE', colors):
-    string += c + ' ' + t + ' '
-PYSPAGE = start + string + end
-
-
 def parse_args():
-    parser = argparse.ArgumentParser(description = PYSPAGE + 
+    parser = argparse.ArgumentParser(description = pyspage.name + 
                         ' Quickly build open source web pages for academic purposes in a pythonic and elegant way.')
     parser.add_argument('file', type=str,
                         help='path to input file')
@@ -59,6 +50,6 @@ def main(args):
 
 def run():
     args = parse_args()
-    print(PYSPAGE)
+    print(pyspage.name)
     main(args)
-    print(PYSPAGE)
+    print(pyspage.name)

@@ -1,5 +1,6 @@
 import re
 from .layout import all_elements
+from .utils import is_std
 
 
 def ele_in_line(line, eles):
@@ -62,9 +63,23 @@ def py2pys(fpath):
                 else:
                     new_line = line.split('=', maxsplit=1)[1]\
                                     .strip()\
-                                    + '()\n'
+                                    + '(None)\n'
                 script += new_line
             else:
                 script += line
     return script
     
+def third_party_modules(fpath):
+    modules = []
+    with open(fpath) as f:
+        for line in f:
+            if 'import ' in line:
+                l = re.split(r' +', line.strip())
+                m = l[1].split('.')[0]
+                if not is_std(m):
+                    modules.append(m)
+    return modules
+
+def get_pkgs(fpath):
+    ms = third_party_modules(fpath)
+    return str(ms)

@@ -1,36 +1,39 @@
-class Base:
+class _BaseElement:
     def __init__(self):
         self.innerHtml = '{innerHtml}'
         self.id_ = '{id_}'
         self.class_ = '{class_}'
+        self.label = '{label}'
     @property
     def html(self):
-        return self.template.format(innerHtml=self.innerHtml, class_=self.class_, id_=self.id_)
+        return self.template.format(innerHtml=self.innerHtml, class_=self.class_, id_=self.id_, label=self.label)
     def write(self, content):
         '''Fill this element with the content you provide (text or figure).'''
         pass
 
-class Row(Base):
+class Row(_BaseElement):
     template = '''
     <div id="{id_}" class="{class_}">
         {innerHtml}
     </div>
     '''
-    def __init__(self, class_ = 'row'):
+    def __init__(self, class_ = 'row pt-3'):
         super().__init__()
         self.class_ = class_
 
-class Column(Base):
+class Column(_BaseElement):
     template = '''
     <div id="{id_}" class="{class_}">
         {innerHtml}
     </div>
     '''
-    def __init__(self, class_ = 'col-auto'):
+    def __init__(self, n_out_of_12='auto', class_ = 'col-auto'):
         super().__init__()
-        self.class_ = class_
+        self.class_ = f'col-md-{n_out_of_12}'
+        if class_ != 'col-auto':
+            self.class_ = class_
 
-class Button(Base):
+class Button(_BaseElement):
     template = '''
     <button id="{id_}" class="{class_}">
         {innerHtml}
@@ -41,78 +44,126 @@ class Button(Base):
         self.innerHtml = innerHtml
         self.class_ = class_
 
-# class Input(Base):
-#     template = '''
-# <div class="mb-3 row">
-#     <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-#     <div class="col-sm-10">
-#         <input type="password" class="form-control" id="inputPassword">
-#     </div>
-# </div>
-#     '''
-#     def __init__(self, label = 'Input', class_ = ''):
-#         super().__init()
-#         self.class_ = class_
+class Input(_BaseElement):
+    template = '''
+<div class="{class_}">
+    <label for="{id_}" class="col-sm-2 col-form-label">{label}</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="{id_}">
+    </div>
+</div>
+    '''
+    def __init__(self, label = 'Input text', class_ = 'mb-3 row'):
+        super().__init__()
+        self.class_ = class_
+        self.label = label
 
-# class File(Base):
-#     template = '''
-# <div class="mb-3">
-#   <label for="formFile" class="form-label">Default file input example</label>
-#   <input class="form-control" type="file" id="formFile">
-# </div>
-#     '''
-#     def __init__(self, label = 'File', class_ = ''):
-#         super().__init()
-#         self.class_ = class_
+class File(_BaseElement):
+    template = '''
+<div class="{class_}">
+  <label for="{id_}" class="form-label">{label}</label>
+  <input class="form-control" type="file" id="{id_}">
+</div>
+    '''
+    def __init__(self, label = 'Upload file', class_ = 'mb-3 row'):
+        super().__init__()
+        self.class_ = class_
+        self.label = label
 
-# class Textarea(Base):
-#     template = '''
-# <div class = "row">
-#     <label for = "name">{label}</label>
-#     <textarea class = "form-control" rows = "3" placeholder = ""></textarea>
-# </div>
-#     '''
-#     def __init__(self, label = 'Textarea', class_ = ''):
-#         super().__init()
-#         self.class_ = class_
+class Textarea(_BaseElement):
+    template = '''
+<div class = "{class_}">
+    <label for = "{id_}" class="form-label">{label}</label>
+    <textarea id="{id_}" class = "form-control" rows = "3" placeholder = ""></textarea>
+</div>
+    '''
+    def __init__(self, label = 'Input lone text', class_ = 'mb-3 row'):
+        super().__init__()
+        self.class_ = class_
+        self.label = label
 
-# class SelectOne(Base):
-#     template = '''
-# <div class="form-check">
-#   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-#   <label class="form-check-label" for="flexRadioDefault1">
-#     Default radio
-#   </label>
-# </div>
-# <div class="form-check">
-#   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-#   <label class="form-check-label" for="flexRadioDefault2">
-#     Default checked radio
-#   </label>
-# </div>
-#     '''
-#     def __init__(self, from_, class_ = ''):
-#         super().__init()
-#         self.class_ = class_
+class SelectOne(_BaseElement):
+    template = '''
+<form class="{class_}" id="{id_}">
+<label for="{id_}" class="form-label">{label}</label>
+  {innerHtml}
+</form>
+    '''
+    _item = '''
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="index" id="{i}" value={index} {checked}>
+  <label class="form-check-label" for="{i}">
+    {i}
+  </label>
+</div>
+'''
+    def __init__(self, from_, label='Select one', default_index=-1, class_ = 'mb-3 row'):
+        super().__init__()
+        self.class_ = class_
+        self.label = label
+        self.from_ = from_
+        self.default_index = default_index
+        self.template = self.template.replace('{innerHtml}', self.inner_html)
 
-# class SelectMany(Base):
-#     template = '''
-# <div class="form-check">
-#   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-#   <label class="form-check-label" for="flexCheckDefault">
-#     Default checkbox
-#   </label>
-# </div>
-# <div class="form-check">
-#   <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-#   <label class="form-check-label" for="flexCheckChecked">
-#     Checked checkbox
-#   </label>
-# </div>
-#     '''
-#     def __init__(self, from_, class_ = ''):
-#         super().__init()
-#         self.class_ = class_
+    @property
+    def inner_html(self):
+        inner = ''
+        for index, i in enumerate(self.from_):
+            checked = ''
+            if index == self.default_index:
+                checked = 'checked'
+            inner += self._item.format(i=i, index=index, checked=checked)
+        return inner
+
+class SelectMulti(_BaseElement):
+    template = '''
+<form id="{id_}" class="{class_}">
+<label for="{id_}" class="form-label">{label}</label>
+  {innerHtml}
+</form>
+    '''
+    _item = '''
+<div class="form-check">
+  <input class="form-check-input" type="checkbox" name="index" value="{index}" id="{i}" {checked}>
+  <label class="form-check-label" for="{i}">
+    {i}
+  </label>
+</div>
+    '''
+    def __init__(self, from_, label='Select one or more', default_index=[], class_ = 'mb-3 row'):
+        super().__init__()
+        self.class_ = class_
+        self.label = label
+        self.from_ = from_
+        self.default_index = default_index
+        self.template = self.template.replace('{innerHtml}', self.inner_html)
+
+    @property
+    def inner_html(self):
+        inner = ''
+        for index, i in enumerate(self.from_):
+            checked = ''
+            if index in self.default_index:
+                checked = 'checked'
+            inner += self._item.format(i=i, index=index, checked=checked)
+        return inner
+
+class Text(_BaseElement):
+    template = '''
+<h{n} id ="{id_}" class="{class_}">{content}</h{n}>
+'''
+    def __init__(self, content, size_level=0, class_=' '):
+        super().__init__()
+        self.class_ = class_
+        self.content = content
+        self.l = size_level
+        self.template = self.htm()
+    def htm(self):
+        if self.l > -1 and self.l < 6:
+            _ = self.template.replace('{n}', str(6-self.l))
+            return _.replace('{content}', self.content)
+        else:
+            raise TypeError('big_level should be a integer form 0 to 5')
 
 ################################################################################################################################
 class Page:
@@ -129,6 +180,11 @@ class Page:
 </head>
 <body class="container">
   {layout}
+
+  <py-config>
+    packages = {packages}
+  </py-config>
+
   <py-script id="pyspage">
 {script}
   </py-script>
@@ -141,12 +197,14 @@ class Page:
         js_url = 'https://pyscript.net/latest/pyscript.js',
         layout = '',
         script = '',
+        packages = '[]'
     ):
         self.page_title = page_title
         self.css_url = css_url
         self.js_url = js_url
         self.layout = layout
         self.script = script
+        self.packages = packages
     
     @property
     def html(self):
@@ -156,4 +214,5 @@ class Page:
             js_url = self.js_url,
             layout = self.layout,
             script = self.script,
+            packages = self.packages,
         )

@@ -1,16 +1,6 @@
-import os
-import sys
-import importlib
 import re
+from .utils import load_local_module
 
-def load_local_module(fpath):
-    # add temporary path
-    dir_name = os.path.dirname(fpath)
-    sys.path.append(dir_name)
-    # dynamicly import the `py` file
-    module_name = os.path.basename(fpath).rstrip('.py')
-    module = importlib.import_module(module_name)
-    return module
 
 def load_layout_str(fpath):
     module = load_local_module(fpath)

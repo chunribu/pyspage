@@ -19,6 +19,7 @@ In the layout part, a `layout` variable should be defined, of which the contents
 ```python
 layout = '''
 row_a
+    box
 row_b
     col_a
         btn_a
@@ -31,11 +32,13 @@ In the script part, all the elements above should be created.
 
 ```python
 from pyspage import *
+import matplotlib.pyplot as plt
 
 row_a = Row()
 row_b = Row()
 col_a = Column()
 col_b = Column()
+box = Column(class_='col-6')
 btn_a = Button('CLICK a')
 btn_b = Button('CLICK b')
 ```
@@ -46,13 +49,17 @@ You can define a function and let an element run it on a certain event happens.
 btn_a.onclick = lambda e: print('a is clicked!')
 
 def click_b(e):
-    print('b is clicked!')
+    fig, ax = plt.subplots()
+    fruits = ['apple', 'blueberry', 'cherry', 'orange']
+    counts = [40, 100, 30, 55]
+    ax.bar(fruits, counts)
+    box.write(fig)
 btn_b.onclick = click_b
 
-def create_row_a():
+def create_box():
     row_a.classList.add('bg-warning')
-    row_a.write('This is the content.')
-row_a.oncreate = create_row_a
+    box.write('This is the content.')
+box.oncreate = create_box
 ```
 
 You can create a figure with `matplotlib` or `altair`, and show it in an empty box(`row` or `column`) by `box.write(fig)`.
