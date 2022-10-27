@@ -2,6 +2,8 @@
 
 Quickly build open source web pages for academic purposes in a pythonic and elegant way.
 
+pyspage makes it possible to build web pages with complex logic from a single Python script. What pyspage actually does is turn a plain `.py` file into a valid [pyscript](https://pyscript.net/) page, you don't have to think about anything other than what you really want to do.
+
 ## Installation
 
 ```shell
