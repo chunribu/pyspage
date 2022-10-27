@@ -52,7 +52,7 @@ row_a = Row()
 row_b = Row()
 col_a = Column()
 col_b = Column()
-box = Column(class_='col-6')
+box   = Column(class_='col-6')
 btn_a = Button('CLICK a')
 btn_b = Button('CLICK b')
 ```
@@ -96,6 +96,36 @@ pyspage index.py -sb
 ## Deployment
 
 This page can then be deployed on [GitHub Pages](https://pages.github.com/), you don't have to bother about anything with HTML, JS or backend APIs.🎉🎉🎉
+
+The easiest way to use GitHub Pages with your built HTML is to use the `ghp-import` package. ghp-import is a lightweight Python package that makes it easy to push HTML content to a GitHub repository.
+
+ghp-import works by copying all of the contents of a folder to a branch of your repository called **gh-pages**, and pushes it to GitHub. The gh-pages branch will be created and populated automatically for you by ghp-import.
+
+1. Install `ghp-import`.
+
+```shell
+pip install ghp-import
+```
+
+2. Call ghp-import and point it to the directory containing your HTML files. 
+
+```shell
+ghp-import -n -p -f demo/
+```
+
+Now goto https://chunribu.github.io/pyspage/scatter_hist.html .The URL format is always *{USER}.github.io/{REPOSITORY}/{FILENAME}*. The filename can be omitted by changing name to `index.html`.
+
+Deployment is that easy!🎉🎉🎉
+
+*Tips:*
+
+- *Make sure that you included the `-n`, it tells GitHub not to build your book with Jekyll, which we don’t want because our HTML is already built.*
+
+- *You may neet to update the settings for your GitHub pages site:*
+
+    - *Use the `gh-pages` branch to host your website.*
+
+    - *Choose root directory `/`.*
 
 ## Supported Elements (Todo List)
 
