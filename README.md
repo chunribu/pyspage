@@ -95,5 +95,18 @@ pyspage index.py -sb
 
 This page can then be deployed on [GitHub Pages](https://pages.github.com/), you don't have to bother about anything with HTML, JS or backend APIs.🎉🎉🎉
 
+## Supported Elements (Todo List)
+
+- [x] Row
+- [x] Column
+- [x] Text
+- [x] Button
+- [x] Input
+- [x] Textarea
+- [x] SelectOne
+- [ ] SelectMulti
+- [ ] File
+- [ ] Image
+
 ## License
 The [MIT License](LICENSE).

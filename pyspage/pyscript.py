@@ -25,19 +25,19 @@ def py2pys(fpath):
     with open(fpath) as f:
         bypass = False
         for line in f:
+            # defining layout
+            if ('layout' in line) and ('=' in line):
+                bypass = True
+                continue
             # layout defined over
-            if bypass:
+            elif bypass:
                 if ('"' in line) or ("'" in line):
                     bypass = False
             # just annotations
             elif line.strip().startswith('#'):
                 script += '\n'
             # importing pyspage
-            elif ('pyspage' in line) and ('import' in line):
-                continue
-            # defining layout
-            elif ('layout' in line) and ('=' in line):
-                bypass = True
+            elif ('pyspage' in line) and ('import ' in line):
                 continue
             # empty line
             elif line.strip() == '':

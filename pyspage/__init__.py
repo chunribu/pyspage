@@ -5,7 +5,7 @@ from .utils import name
 
 
 __author__ = 'jianjiang.bio@gmail.com'
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 
 def main(fpath):
     script = py2pys(fpath)
