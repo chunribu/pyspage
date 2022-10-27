@@ -152,7 +152,7 @@ class Text(_BaseElement):
     template = '''
 <h{n} id ="{id_}" class="{class_}">{content}</h{n}>
 '''
-    def __init__(self, content, size_level=0, class_=' '):
+    def __init__(self, content, size_level=0, class_='pb-3'):
         super().__init__()
         self.class_ = class_
         self.content = content

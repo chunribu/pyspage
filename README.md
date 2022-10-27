@@ -8,6 +8,18 @@ Quickly build open source web pages for academic purposes in a pythonic and eleg
 pip install pyspage
 ```
 
+## An Example
+
+Go to directory `demo/`, there is already a script `scatter_hist.py`.
+
+```shell
+pyspage scatter_hist.py -sb
+```
+
+A file named `scatter_hist.html` is generated, your browser opens a tab and show it.
+
+![demo](assets/screenshot.png)
+
 ## Usage
 
 ### Step 1
@@ -71,13 +83,15 @@ In your terminal, run as follow
 pyspage index.py
 ```
 
-a `index.html` in current directionary is generated. 
+a `index.html` in current directory is generated. 
 
 If you use the arguments `-s`(for server) and `-b`(for browser), pyspage will start a server on 127.0.0.1:8000 and open browser automatically.
 
 ```shell
 pyspage index.py -sb
 ```
+
+## Deployment
 
 This page can then be deployed on [GitHub Pages](https://pages.github.com/), you don't have to bother about anything with HTML, JS or backend APIs.🎉🎉🎉
 
